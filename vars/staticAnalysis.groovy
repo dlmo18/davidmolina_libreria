@@ -27,7 +27,7 @@ def call(Map params = [:]) {
                    echo "[staticAnalysis] Quality Gate 'FALLIDO'"
                         
                     if (abortPipeline) {
-                        error("[staticAnalysis] Abortando pipiline por configuración de 'abortPipeline'.")
+                        error("[staticAnalysis] Abortando pipeline por configuración de 'abortPipeline'.")
                     }
                     else {
                         echo "[staticAnalysis] No se requiere abortar el pipeline."
@@ -38,7 +38,7 @@ def call(Map params = [:]) {
         }
 
     } catch (err) {
-        echo "[staticAnalysis] Error durante el análisis estático: ${err}"
+        error("[staticAnalysis] Error durante el análisis estático: ${err}")
         throw err
     }
 
