@@ -38,8 +38,6 @@ def call(Map params = [:]) {
                         }
                     }
 
-                    }
-                    
                 }
             }
 
