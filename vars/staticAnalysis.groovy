@@ -16,35 +16,38 @@ def call(Map params = [:]) {
 
             echo "[staticAnalysis] Ejecución de las pruebas de calidad de código..."
 
-            if(qualityGateStatus) {
-                echo "[staticAnalysis] Quality Gate exitoso para la rama '${branchName}'."
+            if(failOnQualityGate) {
+                error("[staticAnalysis] Abortando luego del QualityGate por configuración de 'failOnQualityGate'.")
             }
             else {
-                if (failOnQualityGate) {
-                    if( branchName == 'main' || branchName == 'hotfix' ) {
-                        error("[staticAnalysis] Abortando: la rama '${branchName}' requiere Quality Gate aprobado.")
-                    }
-                    else {
-                        echo "[staticAnalysis] Quality Gate fallido, pero la rama '${branchName}' no requiere abortar el pipeline."
-                    }
+                if(abortPipeline) {
+                    echo "[staticAnalysis] Quality Gate exitoso para la rama '${branchName}'."
                 }
                 else {
-                    echo "[staticAnalysis] Quality Gate fallido, no se requiere abortar el pipeline."
+                    if(qualityGateStatus) {
+                        echo "[staticAnalysis] Quality Gate EXITOSO"
+                    }
+                    else {
+                        echo "[staticAnalysis] Quality Gate FALLIDO"
+                        
+                        if (abortPipeline) {
+                            error("[staticAnalysis] Abortando pipiline por configuración de 'abortPipeline'.")
+                        }
+                        else {
+                            echo "[staticAnalysis] No se requiere abortar el pipeline."
+                        }
+                    }
+
+                    }
+                    
                 }
             }
-
-            
 
         }
 
     } catch (err) {
         echo "[staticAnalysis] Error durante el análisis estático: ${err}"
         throw err
-    }
-
-    // Control final según abortPipeline
-    if (abortPipeline) {
-        error("[staticAnalysis] abortPipeline=true, abortando pipeline manualmente.")
     }
 
     echo "[Call] Análisis estático finalizado correctamente."

@@ -9,9 +9,9 @@ pipeline {
                 echo 'Iniciando...'
                 script {
                     staticAnalysis(
-                        failOnQualityGate: true,
+                        failOnQualityGate: false,
                         abortPipeline: false,
-                        qualityGateStatus: false
+                        qualityGateStatus: false //simula falla de Gate
                     )
                 }
             }
