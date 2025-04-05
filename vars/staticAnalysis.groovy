@@ -5,11 +5,17 @@ def call(Map params = [:]) {
 
     String branchName = params.get('branchName', env.BRANCH_NAME)
 
+    String SONARQUBE_PROJECT = 'practica_1_2024_DAVID_MOLINA'
+
     echo "[staticAnalysis] Ejecutando análisis estático de código -  rama '${branchName}'..."
 
     try {
-        withSonarQubeEnv('SonarQube') { // SonarQube en Jenkins
-            sh "sonar-scanner"
+        withSonarQubeEnv("SonarQube") {
+            sh """
+                sonar-scanner \
+                -Dsonar.projectKey=${SONARQUBE_PROJECT} \
+                -Dsonar.sources=.
+            """
         }
 
         // Esperar al Quality Gate (hasta 5 minutos)
