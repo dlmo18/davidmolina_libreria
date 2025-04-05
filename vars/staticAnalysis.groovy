@@ -20,7 +20,7 @@ def call(Map params = [:]) {
                 echo "[staticAnalysis] Quality Gate exitoso para la rama '${branchName}'."
             }
             else {
-                if (forceFailOnQualityGate) {
+                if (failOnQualityGate) {
                     if( branchName == 'master' || branchName == 'hotfix' ) {
                         error("[staticAnalysis] Abortando: la rama '${branchName}' requiere Quality Gate aprobado.")
                     }
