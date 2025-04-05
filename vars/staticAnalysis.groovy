@@ -20,18 +20,18 @@ def call(Map params = [:]) {
             if (qg.status != 'OK') {
                 echo "[staticAnalysis] Quality Gate FALLIDO: ${qg.status}"
                             
-                    if (abortPipeline) {
-                        error("[staticAnalysis] Abortando pipeline por configuración de 'abortPipeline'.")
+                if (abortPipeline) {
+                    error("[staticAnalysis] Abortando pipeline por configuración de 'abortPipeline'.")
+                }
+                else {                        
+                    //evaluando ramas
+                    if( branchName=='main' || branchName=='hotfix' ) {
+                        error("[staticAnalysis] Abortando pipeline ser rama '${branchName}'.")
                     }
-                    else {                        
-                        //evaluando ramas
-                        if( branchName=='main' || branchName=='hotfix' ) {
-                            error("[staticAnalysis] Abortando pipeline ser rama '${branchName}'.")
-                        }
-                        else {
-                            echo "[staticAnalysis] No se requiere abortar el pipeline."
-                        }
-                    }           
+                    else {
+                        echo "[staticAnalysis] No se requiere abortar el pipeline."
+                    }
+                }           
             } else {
                 echo "[staticAnalysis] Quality Gate aprobado EXITOSAMENTE."                
             }
