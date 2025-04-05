@@ -10,7 +10,7 @@ def call(Map params = [:]) {
         
         // Esperar al Quality Gate (hasta 5 minutos)
         timeout(time: 5, unit: 'SECONDS') {
-            echo "[staticAnalysis] Ejecución de las pruebas de calidad de código...",
+            echo "[staticAnalysis] Ejecución de las pruebas de calidad de código..."
         }
 
     } catch (err) {
