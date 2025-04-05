@@ -30,7 +30,14 @@ def call(Map params = [:]) {
                         error("[staticAnalysis] Abortando pipeline por configuración de 'abortPipeline'.")
                     }
                     else {
-                        echo "[staticAnalysis] No se requiere abortar el pipeline."
+                        
+                        //evaluando ramas
+                        if( branchName=='main' || branchName=='hotfix' ) {
+                            error("[staticAnalysis] Abortando pipeline ser rama '${branchName}'.")
+                        }
+                        else {
+                            echo "[staticAnalysis] No se requiere abortar el pipeline."
+                        }
                     }
                 }
             }
