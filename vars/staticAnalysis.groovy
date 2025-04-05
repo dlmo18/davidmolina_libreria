@@ -8,7 +8,7 @@ def call(Map params = [:]) {
     echo "[staticAnalysis] Ejecutando análisis estático de código -  rama '${branchName}'..."
 
     try {
-        withSonarQubeEnv('SonarQubeServer') { // SonarQube en Jenkins
+        withSonarQubeEnv('SonarQube') { // SonarQube en Jenkins
             sh "sonar-scanner"
         }
 
