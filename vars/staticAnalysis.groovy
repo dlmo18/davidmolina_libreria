@@ -21,7 +21,7 @@ def call(Map params = [:]) {
             }
             else {
                 if (failOnQualityGate) {
-                    if( branchName == 'master' || branchName == 'hotfix' ) {
+                    if( branchName == 'main' || branchName == 'hotfix' ) {
                         error("[staticAnalysis] Abortando: la rama '${branchName}' requiere Quality Gate aprobado.")
                     }
                     else {
