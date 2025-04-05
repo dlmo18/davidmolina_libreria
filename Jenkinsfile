@@ -10,8 +10,7 @@ pipeline {
                 script {
                     staticAnalysis(
                         failOnQualityGate: false,
-                        abortPipeline: true,
-                        qualityGateStatus: false //simula falla de Gate
+                        abortPipeline: true
                     )
                 }
             }

@@ -5,32 +5,25 @@ def call(Map params = [:]) {
 
     String branchName = params.get('branchName', env.BRANCH_NAME)
 
-    boolean qualityGateStatus = params.get('qualityGateStatus', false) //simula falla o continuidad
-
     echo "[staticAnalysis] Ejecutando análisis estático de código -  rama '${branchName}'..."
 
     try {
+        withSonarQubeEnv('SonarQubeServer') { // SonarQube en Jenkins
+            sh "sonar-scanner"
+        }
 
-        // Esperar al Quality Gate (hasta 5 segundos)
-        timeout(time: 5, unit: 'SECONDS') {
+        // Esperar al Quality Gate (hasta 5 minutos)
+        timeout(time: 5, unit: 'MINUTES') {
+            def qg = waitForQualityGate()
 
             echo "[staticAnalysis] Ejecución de las pruebas de calidad de código..."
-
-            if(failOnQualityGate) {
-                error("[staticAnalysis] Abortando luego del QualityGate por configuración de 'failOnQualityGate'.")
-            }
-            else {
-                if(qualityGateStatus) {
-                    echo "[staticAnalysis] Quality Gate 'EXITOSO' para la rama '${branchName}'."
-                }
-                else {
-                   echo "[staticAnalysis] Quality Gate 'FALLIDO'"
-                        
+            if (qg.status != 'OK') {
+                echo "[staticAnalysis] Quality Gate FALLIDO: ${qg.status}"
+                            
                     if (abortPipeline) {
                         error("[staticAnalysis] Abortando pipeline por configuración de 'abortPipeline'.")
                     }
-                    else {
-                        
+                    else {                        
                         //evaluando ramas
                         if( branchName=='main' || branchName=='hotfix' ) {
                             error("[staticAnalysis] Abortando pipeline ser rama '${branchName}'.")
@@ -38,8 +31,13 @@ def call(Map params = [:]) {
                         else {
                             echo "[staticAnalysis] No se requiere abortar el pipeline."
                         }
-                    }
-                }
+                    }           
+            } else {
+                echo "[staticAnalysis] Quality Gate aprobado EXITOSAMENTE."                
+            }
+
+            if(failOnQualityGate) {
+                error("[staticAnalysis] Abortando por configuración de 'failOnQualityGate'.")
             }
 
         }
