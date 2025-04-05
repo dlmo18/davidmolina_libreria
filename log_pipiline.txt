@@ -1,0 +1,96 @@
+Lanzada por el usuario unknown or anonymous
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/caches/git-8fcce8b18c6a8e77d3ba8b75c8c1e031/.git # timeout=10
+Setting origin to https://github.com/dlmo18/davidmolina_libreria
+ > git config remote.origin.url https://github.com/dlmo18/davidmolina_libreria # timeout=10
+Fetching origin...
+Fetching upstream changes from origin
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+ > git config --get remote.origin.url # timeout=10
+using GIT_SSH to set credentials 
+Verifying host key using known hosts file
+ > git fetch --tags --force --progress -- origin +refs/heads/*:refs/remotes/origin/* # timeout=10
+Seen branch in repository origin/main
+Seen 1 remote branch
+Obtained Jenkinsfile from ed8fae2612d2904bd2b0dc4f3d32cdde242c4af5
+Loading library threepointssharedlib@main
+Attempting to resolve main from remote references...
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+using GIT_SSH to set credentials 
+Verifying host key using known hosts file
+ > git ls-remote -h -- https://github.com/dlmo18/davidmolina_libreria # timeout=10
+Found match: refs/heads/main revision ed8fae2612d2904bd2b0dc4f3d32cdde242c4af5
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential github_ssh
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/pointssharedlib_multibranch_main@libs/dd93ae746f379ee55e1a63f373790ec56d1a0fc18012642b8c5e665a3dad2e11/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/dlmo18/davidmolina_libreria # timeout=10
+Fetching without tags
+Fetching upstream changes from https://github.com/dlmo18/davidmolina_libreria
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+using GIT_SSH to set credentials 
+Verifying host key using known hosts file
+ > git fetch --no-tags --force --progress -- https://github.com/dlmo18/davidmolina_libreria +refs/heads/*:refs/remotes/origin/* # timeout=10
+Checking out Revision ed8fae2612d2904bd2b0dc4f3d32cdde242c4af5 (main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f ed8fae2612d2904bd2b0dc4f3d32cdde242c4af5 # timeout=10
+Commit message: "ajuste de groovie"
+ > git rev-list --no-walk 1457857f2e6bf7aa6a3a18f9da4834879aff2699 # timeout=10
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins  in /var/lib/jenkins/workspace/pointssharedlib_multibranch_main
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential github_ssh
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/pointssharedlib_multibranch_main/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/dlmo18/davidmolina_libreria # timeout=10
+Fetching without tags
+Fetching upstream changes from https://github.com/dlmo18/davidmolina_libreria
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+using GIT_SSH to set credentials 
+Verifying host key using known hosts file
+ > git fetch --no-tags --force --progress -- https://github.com/dlmo18/davidmolina_libreria +refs/heads/*:refs/remotes/origin/* # timeout=10
+Checking out Revision ed8fae2612d2904bd2b0dc4f3d32cdde242c4af5 (main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f ed8fae2612d2904bd2b0dc4f3d32cdde242c4af5 # timeout=10
+Commit message: "ajuste de groovie"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Analisis de código)
+[Pipeline] echo
+Iniciando...
+[Pipeline] script
+[Pipeline] {
+[Pipeline] echo
+[staticAnalysis] Ejecutando análisis estático de código...
+[Pipeline] timeout
+Timeout set to expire in 5 Seg
+[Pipeline] {
+[Pipeline] echo
+[staticAnalysis] Ejecución de las pruebas de calidad de código...
+[Pipeline] }
+[Pipeline] // timeout
+[Pipeline] echo
+[Call] Análisis estático finalizado correctamente.
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
